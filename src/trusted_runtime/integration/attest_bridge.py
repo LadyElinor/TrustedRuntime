@@ -615,7 +615,7 @@ class AttestBridge:
                 elif soft_flags_with_taint or result.get("pass_scope_limit"):
                     decision_effect = "REVIEW"
                 if delegated_lineage.present and delegated_lineage.lineage_status in {"broken", "unresolved"}:
-                    decision_effect = "BLOCK" if delegated_lineage.lineage_status == "broken" else "REVIEW"
+                    decision_effect = "BLOCK"
                 if delegated_lineage.present and delegated_lineage.attenuation_status == "widened":
                     decision_effect = "BLOCK"
                 verification = AttestVerificationState(
