@@ -42,10 +42,14 @@ def test_council_and_warrant_paths_are_explicit_for_current_environment():
         assert decision.reconciliation is not None
     expected_tas = AdapterProvenance.REAL if trustworthy_agent_stack_available() else AdapterProvenance.STUB
     assert decision.adapter_provenance["tas"] is expected_tas
-    if real_telemetry_stack_available() and decision.cer_bundle.sophron_validation.passed is True:
-        assert decision.adapter_provenance["cer_bundle"] is AdapterProvenance.REAL
+    if not real_telemetry_stack_available():
+        expected_cer = AdapterProvenance.STUB
+    elif decision.cer_bundle.sophron_validation.passed is True:
+        expected_cer = AdapterProvenance.REAL
     else:
-        assert decision.adapter_provenance["cer_bundle"] is AdapterProvenance.STUB
+        expected_cer = AdapterProvenance.PARTIAL
+
+    assert decision.adapter_provenance["cer_bundle"] is expected_cer
 
 
 def test_translation_maps_safety_invariant_to_attest():

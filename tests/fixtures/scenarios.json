@@ -286,8 +286,7 @@
         ],
         "expected_when_full": {
           "hazard_unclassified_count": 0,
-          "hazard_family_present": "contested_value",
-          "rationale": "generic fallback translation now preserves lens-level value conflict as contested_value rather than collapsing it to generic unclassified"
+          "rationale": "fallback translation assertions belong to the warrant layer; the structural tier should not pin an EthicsCouncil hazard family here"
         }
       },
       "adapter_dependent": {
